@@ -5,4 +5,6 @@ module com.example.workshopjavafxjdbc {
 
     opens com.example.application to javafx.fxml;
     exports com.example.application;
+    opens com.example.model.entities;
+    opens com.example.model.services;
 }
