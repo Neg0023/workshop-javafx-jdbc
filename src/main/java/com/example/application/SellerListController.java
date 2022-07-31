@@ -5,6 +5,7 @@ import com.example.application.com.exemple.util.Utils;
 import com.example.application.listeners.DataChangeListener;
 import com.example.db.DbIntegratyException;
 import com.example.model.entities.Seller;
+import com.example.model.services.DepartmentService;
 import com.example.model.services.SellerService;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -106,7 +107,8 @@ public class SellerListController implements Initializable, DataChangeListener {
 
             SellerFormController controller = loader.getController();
             controller.setSeller(obj);
-            controller.setSellerService(new SellerService());
+            controller.setServices(new SellerService(), new DepartmentService());
+            controller.loadAssociatedObjects();
             controller.subscribeDataChangeListener(this);
             controller.updateFormData();
 
@@ -119,6 +121,7 @@ public class SellerListController implements Initializable, DataChangeListener {
             dialogStage.showAndWait();
 
         } catch (IOException e) {
+            e.printStackTrace();
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
